@@ -1,0 +1,72 @@
+/* 전체 페이지 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* 로그인 폼 스타일 */
+form {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    display: flex;
+    align-items: center; /* 내부 요소 수직 가운데 정렬 */
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* 제목 스타일 */
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* 입력 필드 스타일 */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    margin-bottom: 10px; /* 입력 필드 간 간격 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* 버튼 스타일 */
+input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+label {
+    align-self: flex-start; /* label을 왼쪽에 배치 */
+    margin-bottom: 5px;  /* 입력 필드와의 간격 */
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 400px) {
+    form {
+        width: 90%;
+    }
+}

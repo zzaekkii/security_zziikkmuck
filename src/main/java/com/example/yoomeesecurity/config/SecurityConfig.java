@@ -15,11 +15,22 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/", "/login").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .requestMatchers("/mypage/**").hasAnyRole("ADMIN", "USER")
                         .anyRequest().authenticated()
                 );
+
+        http
+                .formLogin((auth) -> auth.loginPage("/login")
+                        .loginProcessingUrl("/loginProcessing")
+                        .permitAll()
+                );
+
+        // 초기 실습 편의를 위해 csrf 토큰 설정 잠시 비활성화.
+        http
+                .csrf((auth) -> auth.disable());
 
         return http.build();
     }
