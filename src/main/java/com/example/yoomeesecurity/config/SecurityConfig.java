@@ -2,6 +2,8 @@ package com.example.yoomeesecurity.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -16,10 +18,21 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    // 비밀번호 인코더.
     @Bean
     public PasswordEncoder passwordEncoder() {
 
         return new BCryptPasswordEncoder();
+    }
+
+    // 권한 계층 설정.
+    @Bean
+    public RoleHierarchy roleHierarchy() {
+
+        return RoleHierarchyImpl.withDefaultRolePrefix()
+                .role("ADMIN").implies("USER")
+                .role("USER").implies("ANONYMOUS")
+                .build();
     }
 
     @Bean
@@ -30,7 +43,7 @@ public class SecurityConfig {
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/", "/login", "/signup","/error/**").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
-                        .requestMatchers("/mypage/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/mypage/**").hasAnyRole( "USER") // 유저 권한 이상 접근 가능.
                         .anyRequest().authenticated()
                 );
 

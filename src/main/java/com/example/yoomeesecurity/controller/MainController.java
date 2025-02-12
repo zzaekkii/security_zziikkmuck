@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.UUID;
+
 @Controller
 public class MainController {
 
@@ -21,6 +23,7 @@ public class MainController {
 
             model.addAttribute("userId", userId);
             model.addAttribute("role", role);
+            model.addAttribute("randomSeed", UUID.randomUUID().toString().substring(0, 8));
         }
 
         return "main";
