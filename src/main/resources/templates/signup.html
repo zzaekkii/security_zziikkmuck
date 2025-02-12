@@ -22,6 +22,8 @@
         <label for="confirmPassword">비밀번호 확인</label>
         <input id="confirmPassword" type="password" name="confirmPassword" placeholder="비밀번호 확인" required />
 
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+
         <input type="submit" value="회원가입" />
     </form>
 </body>

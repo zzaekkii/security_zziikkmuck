@@ -40,9 +40,8 @@ public class SecurityConfig {
                         .permitAll()
                 );
 
-        // 초기 실습 편의를 위해 csrf 토큰 설정 잠시 비활성화.
-        http
-                .csrf((auth) -> auth.disable());
+//        http
+//                .csrf((auth) -> auth.disable());
 
         // 다중 로그인 관리.
         http
