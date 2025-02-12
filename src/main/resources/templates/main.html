@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,6 +9,19 @@
     <title>유미 어서오고</title>
 </head>
 <body>
-    <h1>반갑네~</h1>
+    <!-- 로그인한 유저한테는 이름 부르면서 인사 -->
+    <h1 th:if="${userId}">
+        반갑네~ <span th:text="${userId}"></span>!
+    </h1>
+
+    <!-- 비로그인 유저한테도 인사는 함 -->
+    <h1 th:unless="${userId}">
+        반갑네~ 손님!
+    </h1>
+
+    <!-- USER나 ADMIN 권한일 때만 표시 -->
+    <p th:if="${role}" sec:authorize="hasAnyRole('USER', 'ADMIN')">
+        자네의 권한은 <span th:text="${role}"></span>이라네!
+    </p>
 </body>
 </html>
