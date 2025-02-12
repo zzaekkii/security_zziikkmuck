@@ -21,7 +21,10 @@ public class SignupService {
     @Transactional
     public void signupProcess(SignupDto signupDto) {
 
-        // username 중복 검사 필요.
+        // username 중복 검사 - 도메인 서비스로 분리하고 싶긴한데 일단 보류.
+        if (userRepository.existsByUsername(signupDto.getUsername())) {
+            return;
+        }
 
         User newUser =
                 User.builder()
